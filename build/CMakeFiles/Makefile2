@@ -63,7 +63,7 @@ CMAKE_BINARY_DIR = /home/atomic/Documents/my-projects/Project-DELTA/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/reaper_app.dir/all
+all: CMakeFiles/reaper.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -71,34 +71,34 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/reaper_app.dir/clean
+clean: CMakeFiles/reaper.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/reaper_app.dir
+# Target rules for target CMakeFiles/reaper.dir
 
 # All Build rule for target.
-CMakeFiles/reaper_app.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/atomic/Documents/my-projects/Project-DELTA/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9 "Built target reaper_app"
-.PHONY : CMakeFiles/reaper_app.dir/all
+CMakeFiles/reaper.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/atomic/Documents/my-projects/Project-DELTA/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9 "Built target reaper"
+.PHONY : CMakeFiles/reaper.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/reaper_app.dir/rule: cmake_check_build_system
+CMakeFiles/reaper.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/atomic/Documents/my-projects/Project-DELTA/build/CMakeFiles 9
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/reaper_app.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/reaper.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/atomic/Documents/my-projects/Project-DELTA/build/CMakeFiles 0
-.PHONY : CMakeFiles/reaper_app.dir/rule
+.PHONY : CMakeFiles/reaper.dir/rule
 
 # Convenience name for target.
-reaper_app: CMakeFiles/reaper_app.dir/rule
-.PHONY : reaper_app
+reaper: CMakeFiles/reaper.dir/rule
+.PHONY : reaper
 
 # clean rule for target.
-CMakeFiles/reaper_app.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/clean
-.PHONY : CMakeFiles/reaper_app.dir/clean
+CMakeFiles/reaper.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/clean
+.PHONY : CMakeFiles/reaper.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

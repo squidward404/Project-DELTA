@@ -117,24 +117,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named reaper_app
+# Target rules for targets named reaper
 
 # Build rule for target.
-reaper_app: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 reaper_app
-.PHONY : reaper_app
+reaper: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 reaper
+.PHONY : reaper
 
 # fast build rule for target.
-reaper_app/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/build
-.PHONY : reaper_app/fast
+reaper/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/build
+.PHONY : reaper/fast
 
 libs/imgui/imgui.o: libs/imgui/imgui.cpp.o
 .PHONY : libs/imgui/imgui.o
 
 # target to build an object file
 libs/imgui/imgui.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/libs/imgui/imgui.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/libs/imgui/imgui.cpp.o
 .PHONY : libs/imgui/imgui.cpp.o
 
 libs/imgui/imgui.i: libs/imgui/imgui.cpp.i
@@ -142,7 +142,7 @@ libs/imgui/imgui.i: libs/imgui/imgui.cpp.i
 
 # target to preprocess a source file
 libs/imgui/imgui.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/libs/imgui/imgui.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/libs/imgui/imgui.cpp.i
 .PHONY : libs/imgui/imgui.cpp.i
 
 libs/imgui/imgui.s: libs/imgui/imgui.cpp.s
@@ -150,7 +150,7 @@ libs/imgui/imgui.s: libs/imgui/imgui.cpp.s
 
 # target to generate assembly for a file
 libs/imgui/imgui.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/libs/imgui/imgui.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/libs/imgui/imgui.cpp.s
 .PHONY : libs/imgui/imgui.cpp.s
 
 libs/imgui/imgui_demo.o: libs/imgui/imgui_demo.cpp.o
@@ -158,7 +158,7 @@ libs/imgui/imgui_demo.o: libs/imgui/imgui_demo.cpp.o
 
 # target to build an object file
 libs/imgui/imgui_demo.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/libs/imgui/imgui_demo.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/libs/imgui/imgui_demo.cpp.o
 .PHONY : libs/imgui/imgui_demo.cpp.o
 
 libs/imgui/imgui_demo.i: libs/imgui/imgui_demo.cpp.i
@@ -166,7 +166,7 @@ libs/imgui/imgui_demo.i: libs/imgui/imgui_demo.cpp.i
 
 # target to preprocess a source file
 libs/imgui/imgui_demo.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/libs/imgui/imgui_demo.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/libs/imgui/imgui_demo.cpp.i
 .PHONY : libs/imgui/imgui_demo.cpp.i
 
 libs/imgui/imgui_demo.s: libs/imgui/imgui_demo.cpp.s
@@ -174,7 +174,7 @@ libs/imgui/imgui_demo.s: libs/imgui/imgui_demo.cpp.s
 
 # target to generate assembly for a file
 libs/imgui/imgui_demo.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/libs/imgui/imgui_demo.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/libs/imgui/imgui_demo.cpp.s
 .PHONY : libs/imgui/imgui_demo.cpp.s
 
 libs/imgui/imgui_draw.o: libs/imgui/imgui_draw.cpp.o
@@ -182,7 +182,7 @@ libs/imgui/imgui_draw.o: libs/imgui/imgui_draw.cpp.o
 
 # target to build an object file
 libs/imgui/imgui_draw.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/libs/imgui/imgui_draw.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/libs/imgui/imgui_draw.cpp.o
 .PHONY : libs/imgui/imgui_draw.cpp.o
 
 libs/imgui/imgui_draw.i: libs/imgui/imgui_draw.cpp.i
@@ -190,7 +190,7 @@ libs/imgui/imgui_draw.i: libs/imgui/imgui_draw.cpp.i
 
 # target to preprocess a source file
 libs/imgui/imgui_draw.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/libs/imgui/imgui_draw.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/libs/imgui/imgui_draw.cpp.i
 .PHONY : libs/imgui/imgui_draw.cpp.i
 
 libs/imgui/imgui_draw.s: libs/imgui/imgui_draw.cpp.s
@@ -198,7 +198,7 @@ libs/imgui/imgui_draw.s: libs/imgui/imgui_draw.cpp.s
 
 # target to generate assembly for a file
 libs/imgui/imgui_draw.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/libs/imgui/imgui_draw.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/libs/imgui/imgui_draw.cpp.s
 .PHONY : libs/imgui/imgui_draw.cpp.s
 
 libs/imgui/imgui_impl_glfw.o: libs/imgui/imgui_impl_glfw.cpp.o
@@ -206,7 +206,7 @@ libs/imgui/imgui_impl_glfw.o: libs/imgui/imgui_impl_glfw.cpp.o
 
 # target to build an object file
 libs/imgui/imgui_impl_glfw.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/libs/imgui/imgui_impl_glfw.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/libs/imgui/imgui_impl_glfw.cpp.o
 .PHONY : libs/imgui/imgui_impl_glfw.cpp.o
 
 libs/imgui/imgui_impl_glfw.i: libs/imgui/imgui_impl_glfw.cpp.i
@@ -214,7 +214,7 @@ libs/imgui/imgui_impl_glfw.i: libs/imgui/imgui_impl_glfw.cpp.i
 
 # target to preprocess a source file
 libs/imgui/imgui_impl_glfw.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/libs/imgui/imgui_impl_glfw.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/libs/imgui/imgui_impl_glfw.cpp.i
 .PHONY : libs/imgui/imgui_impl_glfw.cpp.i
 
 libs/imgui/imgui_impl_glfw.s: libs/imgui/imgui_impl_glfw.cpp.s
@@ -222,7 +222,7 @@ libs/imgui/imgui_impl_glfw.s: libs/imgui/imgui_impl_glfw.cpp.s
 
 # target to generate assembly for a file
 libs/imgui/imgui_impl_glfw.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/libs/imgui/imgui_impl_glfw.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/libs/imgui/imgui_impl_glfw.cpp.s
 .PHONY : libs/imgui/imgui_impl_glfw.cpp.s
 
 libs/imgui/imgui_impl_opengl3.o: libs/imgui/imgui_impl_opengl3.cpp.o
@@ -230,7 +230,7 @@ libs/imgui/imgui_impl_opengl3.o: libs/imgui/imgui_impl_opengl3.cpp.o
 
 # target to build an object file
 libs/imgui/imgui_impl_opengl3.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/libs/imgui/imgui_impl_opengl3.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/libs/imgui/imgui_impl_opengl3.cpp.o
 .PHONY : libs/imgui/imgui_impl_opengl3.cpp.o
 
 libs/imgui/imgui_impl_opengl3.i: libs/imgui/imgui_impl_opengl3.cpp.i
@@ -238,7 +238,7 @@ libs/imgui/imgui_impl_opengl3.i: libs/imgui/imgui_impl_opengl3.cpp.i
 
 # target to preprocess a source file
 libs/imgui/imgui_impl_opengl3.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/libs/imgui/imgui_impl_opengl3.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/libs/imgui/imgui_impl_opengl3.cpp.i
 .PHONY : libs/imgui/imgui_impl_opengl3.cpp.i
 
 libs/imgui/imgui_impl_opengl3.s: libs/imgui/imgui_impl_opengl3.cpp.s
@@ -246,7 +246,7 @@ libs/imgui/imgui_impl_opengl3.s: libs/imgui/imgui_impl_opengl3.cpp.s
 
 # target to generate assembly for a file
 libs/imgui/imgui_impl_opengl3.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/libs/imgui/imgui_impl_opengl3.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/libs/imgui/imgui_impl_opengl3.cpp.s
 .PHONY : libs/imgui/imgui_impl_opengl3.cpp.s
 
 libs/imgui/imgui_tables.o: libs/imgui/imgui_tables.cpp.o
@@ -254,7 +254,7 @@ libs/imgui/imgui_tables.o: libs/imgui/imgui_tables.cpp.o
 
 # target to build an object file
 libs/imgui/imgui_tables.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/libs/imgui/imgui_tables.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/libs/imgui/imgui_tables.cpp.o
 .PHONY : libs/imgui/imgui_tables.cpp.o
 
 libs/imgui/imgui_tables.i: libs/imgui/imgui_tables.cpp.i
@@ -262,7 +262,7 @@ libs/imgui/imgui_tables.i: libs/imgui/imgui_tables.cpp.i
 
 # target to preprocess a source file
 libs/imgui/imgui_tables.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/libs/imgui/imgui_tables.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/libs/imgui/imgui_tables.cpp.i
 .PHONY : libs/imgui/imgui_tables.cpp.i
 
 libs/imgui/imgui_tables.s: libs/imgui/imgui_tables.cpp.s
@@ -270,7 +270,7 @@ libs/imgui/imgui_tables.s: libs/imgui/imgui_tables.cpp.s
 
 # target to generate assembly for a file
 libs/imgui/imgui_tables.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/libs/imgui/imgui_tables.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/libs/imgui/imgui_tables.cpp.s
 .PHONY : libs/imgui/imgui_tables.cpp.s
 
 libs/imgui/imgui_widgets.o: libs/imgui/imgui_widgets.cpp.o
@@ -278,7 +278,7 @@ libs/imgui/imgui_widgets.o: libs/imgui/imgui_widgets.cpp.o
 
 # target to build an object file
 libs/imgui/imgui_widgets.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/libs/imgui/imgui_widgets.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/libs/imgui/imgui_widgets.cpp.o
 .PHONY : libs/imgui/imgui_widgets.cpp.o
 
 libs/imgui/imgui_widgets.i: libs/imgui/imgui_widgets.cpp.i
@@ -286,7 +286,7 @@ libs/imgui/imgui_widgets.i: libs/imgui/imgui_widgets.cpp.i
 
 # target to preprocess a source file
 libs/imgui/imgui_widgets.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/libs/imgui/imgui_widgets.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/libs/imgui/imgui_widgets.cpp.i
 .PHONY : libs/imgui/imgui_widgets.cpp.i
 
 libs/imgui/imgui_widgets.s: libs/imgui/imgui_widgets.cpp.s
@@ -294,7 +294,7 @@ libs/imgui/imgui_widgets.s: libs/imgui/imgui_widgets.cpp.s
 
 # target to generate assembly for a file
 libs/imgui/imgui_widgets.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/libs/imgui/imgui_widgets.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/libs/imgui/imgui_widgets.cpp.s
 .PHONY : libs/imgui/imgui_widgets.cpp.s
 
 src/main.o: src/main.cpp.o
@@ -302,7 +302,7 @@ src/main.o: src/main.cpp.o
 
 # target to build an object file
 src/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/src/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/src/main.cpp.o
 .PHONY : src/main.cpp.o
 
 src/main.i: src/main.cpp.i
@@ -310,7 +310,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/src/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -318,7 +318,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper_app.dir/build.make CMakeFiles/reaper_app.dir/src/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/reaper.dir/build.make CMakeFiles/reaper.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 # Help Target
@@ -329,7 +329,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... reaper_app"
+	@echo "... reaper"
 	@echo "... libs/imgui/imgui.o"
 	@echo "... libs/imgui/imgui.i"
 	@echo "... libs/imgui/imgui.s"
