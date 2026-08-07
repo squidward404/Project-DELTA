@@ -4,7 +4,8 @@ project(ProjectDELTA)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# 1. Executable Definition (No changes needed here)
+# 1. Executable Definition
+# Note: DNSResolve.cpp is NOT listed here because it is now header-only
 add_executable(reaper
     src/main.cpp
     libs/imgui/imgui.cpp
@@ -17,25 +18,20 @@ add_executable(reaper
 )
 
 # 2. Include Directories
-# Ensure libs/glfw/include/GLFW/glfw3.h exists
+# 'include' folder added so main.cpp can find "DNSResolve.h"
 target_include_directories(reaper PRIVATE
     src
+    include
     libs/imgui
     libs/glfw/include
 )
 
 # 3. Link Libraries
-# CHANGED: Added 'resolv' for DNS resolution compatibility on some distros
-# Kept your static GLFW link, but ensure the path is correct relative to CMakeLists.txt
 target_link_libraries(reaper PRIVATE
     ${CMAKE_SOURCE_DIR}/libs/glfw/build/src/libglfw3.a
     GL
     X11
     pthread
     dl
-    resolv  # <--- ADDED: Essential for getaddrinfo on some Linux systems
-)
-
-# Optional: If you get linker errors about GLFW, uncomment below to find it dynamically
-# find_package(glfw3 REQUIRED)
-# target_link_libraries(reaper_app PRIVATE glfw)   
+    resolv  # Required for DNS on Linux
+)   
