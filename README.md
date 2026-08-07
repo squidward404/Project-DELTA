@@ -8,4 +8,4 @@ cmake ..
 make -j4
 
 # Run
-./reaper_app   
+./reaper

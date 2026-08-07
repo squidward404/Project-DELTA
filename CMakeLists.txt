@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # 1. Executable Definition (No changes needed here)
-add_executable(reaper_app
+add_executable(reaper
     src/main.cpp
     libs/imgui/imgui.cpp
     libs/imgui/imgui_draw.cpp
@@ -18,7 +18,7 @@ add_executable(reaper_app
 
 # 2. Include Directories
 # Ensure libs/glfw/include/GLFW/glfw3.h exists
-target_include_directories(reaper_app PRIVATE
+target_include_directories(reaper PRIVATE
     src
     libs/imgui
     libs/glfw/include
@@ -27,7 +27,7 @@ target_include_directories(reaper_app PRIVATE
 # 3. Link Libraries
 # CHANGED: Added 'resolv' for DNS resolution compatibility on some distros
 # Kept your static GLFW link, but ensure the path is correct relative to CMakeLists.txt
-target_link_libraries(reaper_app PRIVATE
+target_link_libraries(reaper PRIVATE
     ${CMAKE_SOURCE_DIR}/libs/glfw/build/src/libglfw3.a
     GL
     X11

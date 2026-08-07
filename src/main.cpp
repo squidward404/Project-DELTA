@@ -1,9 +1,9 @@
-// src/main.cpp – Project Delta v1.1 (Real DNS + Improved GUI)
+// src/main.cpp – Project Delta v1.4 (Final Titles)
+// Compile with: cmake .. && make
 
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
-
 #include <GL/gl.h>
 #include <GLFW/glfw3.h>
 
@@ -13,7 +13,7 @@
 #include <cstring>
 #include <sstream>
 
-// Platform specific includes for DNS
+// --- Platform Specific Headers for DNS ---
 #ifdef _WIN32
     #include <winsock2.h>
     #include <ws2tcpip.h>
@@ -24,40 +24,53 @@
     #include <sys/socket.h>
 #endif
 
-// --- REAL DNS IMPLEMENTATION ---
-std::vector<std::string> resolveDomainIPs(const std::string& domain) {
-    std::vector<std::string> ips;
-    struct addrinfo hints, *res, *p;
-    int status;
-    char ipstr[INET6_ADDRSTRLEN];
-
+// --- DNS Resolution Logic ---
+std::string resolveDomainDetailed(const std::string& domain) {
+    std::ostringstream result;
+    struct addrinfo hints, *res;
+    
     memset(&hints, 0, sizeof hints);
-    hints.ai_family = AF_UNSPEC; // AF_INET or AF_INET6
+    hints.ai_family = AF_UNSPEC;      // Support IPv4 (A) and IPv6 (AAAA)
     hints.ai_socktype = SOCK_STREAM;
+    hints.ai_flags = AI_CANONNAME;    // Enable CNAME detection
 
-    if ((status = getaddrinfo(domain.c_str(), NULL, &hints, &res)) != 0) {
-        return {"[Error] Could not resolve: " + std::string(gai_strerror(status))};
+    int status = getaddrinfo(domain.c_str(), NULL, &hints, &res);
+    if (status != 0) {
+        return "[Error] Resolution failed: " + std::string(gai_strerror(status));
     }
 
-    for (p = res; p != NULL; p = p->ai_next) {
-        void *addr;
+    // 1. Detect CNAME
+    if (res->ai_canonname && strcmp(res->ai_canonname, domain.c_str()) != 0) {
+        result << "[CNAME] " << domain << "  -->  " << res->ai_canonname << "\n";
+    }
+
+    // 2. Iterate and print A / AAAA records
+    struct addrinfo* p = res;
+    while(p != NULL) {
+        char ipstr[INET6_ADDRSTRLEN];
+        std::string typeStr = "";
+
         if (p->ai_family == AF_INET) {
-            struct sockaddr_in *ipv4 = (struct sockaddr_in *)p->ai_addr;
-            addr = &(ipv4->sin_addr);
-        } else {
-            struct sockaddr_in6 *ipv6 = (struct sockaddr_in6 *)p->ai_addr;
-            addr = &(ipv6->sin6_addr);
+            struct sockaddr_in* ipv4 = (struct sockaddr_in*)p->ai_addr;
+            inet_ntop(p->ai_family, &(ipv4->sin_addr), ipstr, sizeof ipstr);
+            typeStr = "[A]    "; 
+        } else if (p->ai_family == AF_INET6) {
+            struct sockaddr_in6* ipv6 = (struct sockaddr_in6*)p->ai_addr;
+            inet_ntop(p->ai_family, &(ipv6->sin6_addr), ipstr, sizeof ipstr);
+            typeStr = "[AAAA] "; 
         }
-        inet_ntop(p->ai_family, addr, ipstr, sizeof ipstr);
-        ips.push_back(std::string(ipstr));
+
+        if (!typeStr.empty()) {
+            result << typeStr << ipstr << "\n";
+        }
+        p = p->ai_next;
     }
 
     freeaddrinfo(res);
-    return ips;
+    return result.str();
 }
 
-// --- GUI HELPERS ---
-// Simple callback to allow only valid domain chars
+// --- Input Validation Callback ---
 int InputTextCallback(ImGuiInputTextCallbackData* data) {
     if (data->EventFlag == ImGuiInputTextFlags_CallbackCharFilter) {
         char c = (char)data->EventChar;
@@ -65,44 +78,55 @@ int InputTextCallback(ImGuiInputTextCallbackData* data) {
             (c >= '0' && c <= '9') || c == '.' || c == '-') {
             return 0;
         }
-        return 1; // Block character
+        return 1;
     }
     return 0;
 }
 
 int main() {
-    // Initialize Socket Lib (Windows only)
     #ifdef _WIN32
     WSADATA wsaData;
-    WSAStartup(MAKEWORD(2, 2), &wsaData);
+    if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) return -1;
     #endif
 
-    if (!glfwInit()) return -1;
+    if (!glfwInit()) {
+        fprintf(stderr, "Failed to init GLFW\n");
+        return -1;
+    }
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    GLFWwindow* window = glfwCreateWindow(1280, 720, "[Project DELTA] - DNS Recon", nullptr, nullptr);
+    // 1. OS Window Title: Only "[Project DELTA]"
+    GLFWwindow* window = glfwCreateWindow(1000, 650, "[Project DELTA]", nullptr, nullptr);
     if (!window) { glfwTerminate(); return -1; }
 
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1);
 
+    // --- CENTER WINDOW ON STARTUP ---
+    int monitorCount;
+    GLFWmonitor** monitors = glfwGetMonitors(&monitorCount);
+    if (monitorCount > 0) {
+        const GLFWvidmode* mode = glfwGetVideoMode(monitors[0]);
+        int windowW, windowH;
+        glfwGetWindowSize(window, &windowW, &windowH);
+        glfwSetWindowPos(window, (mode->width - windowW) / 2, (mode->height - windowH) / 2);
+    }
+    // --------------------------------
+
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
-    
-    // FIX 1: Font Scaling for better visibility
-    io.FontGlobalScale = 1.2f; 
+    io.FontGlobalScale = 1.2f;
 
     const char* glsl_version = "#version 130";
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init(glsl_version);
 
     char g_inputBuf[256] = "";
-    std::string g_results = "";
-    bool g_running = false;
+    std::string g_results = "Ready. Enter a domain (e.g., google.com)";
 
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
@@ -111,55 +135,47 @@ int main() {
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        // FIX 2: Proper Window Sizing and Styling
         ImGui::SetNextWindowSize(ImVec2(900, 600), ImGuiCond_FirstUseEver);
-        ImGui::SetNextWindowPos(ImVec2(200, 100), ImGuiCond_FirstUseEver);
+        
+        // 2. Inner Window Title: "Project DELTA | By ATOMIC"
+        ImGui::Begin("Project DELTA | By ATOMIC", nullptr, ImGuiWindowFlags_NoCollapse);
 
-        ImGui::Begin("Project DELTA // DNS Intelligence", nullptr, ImGuiWindowFlags_NoCollapse);
-
-        ImGui::Text("Enter Target Domain:");
+        ImGui::Text("Target Domain:");
         ImGui::SameLine();
-        // FIX 3: Input Validation and larger input field
         ImGui::SetNextItemWidth(300);
         ImGui::InputText("##DomainInput", g_inputBuf, sizeof(g_inputBuf), 
                          ImGuiInputTextFlags_CallbackCharFilter, InputTextCallback);
-
         ImGui::SameLine();
-        if (ImGui::Button("Resolve IP", ImVec2(120, 0))) {
+
+        if (ImGui::Button("Resolve DNS", ImVec2(120, 0))) {
             std::string target(g_inputBuf);
             if (!target.empty()) {
-                g_running = true;
-                g_results = "[*] Resolving " + target + "...\n\n";
-                
-                auto ips = resolveDomainIPs(target);
-                
-                g_results += "[+] DNS Records Found:\n";
-                for (const auto& ip : ips) {
-                    g_results += "    - " + ip + "\n";
-                }
-                g_running = false;
+                size_t start = target.find("://");
+                if (start != std::string::npos) target = target.substr(start + 3);
+                size_t end = target.find("/");
+                if (end != std::string::npos) target = target.substr(0, end);
+                if (target.empty()) target = "Invalid Domain";
+
+                g_results = "[*] Scanning: " + target + "\n\n" + resolveDomainDetailed(target);
             } else {
-                g_results = "[!] Error: Please enter a valid domain.";
+                g_results = "[!] Error: Please enter a domain.";
             }
         }
 
         ImGui::Separator();
 
-        // Results Area
         ImGui::Text("Analysis Results:");
-        ImGui::BeginChild("ResultsFrame", ImVec2(0, 300), true, ImGuiWindowFlags_HorizontalScrollbar);
+        ImGui::BeginChild("ResultsFrame", ImVec2(0, 350), true, ImGuiWindowFlags_HorizontalScrollbar);
+        
         if (!g_results.empty()) {
             ImGui::TextUnformatted(g_results.c_str());
-        } else {
-            ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(100, 100, 100, 255));
-            ImGui::Text("Waiting for input...");
-            ImGui::PopStyleColor();
         }
+        
         ImGui::EndChild();
 
-        if (ImGui::Button("Clear")) {
-            g_results.clear();
-            g_inputBuf[0] = 0;
+        if (ImGui::Button("Clear")) { 
+            g_results = "Ready."; 
+            g_inputBuf[0] = 0; 
         }
         ImGui::SameLine();
         if (ImGui::Button("Exit")) {
@@ -168,7 +184,6 @@ int main() {
 
         ImGui::End();
 
-        // Rendering
         ImGui::Render();
         int display_w, display_h;
         glfwGetFramebufferSize(window, &display_w, &display_h);
