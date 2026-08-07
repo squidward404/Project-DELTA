@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/atomic/Documents/my-projects/Project-DELTA/src -I/home/atomic/Documents/my-projects/Project-DELTA/libs/imgui -I/home/atomic/Documents/my-projects/Project-DELTA/libs/glfw/include
+CXX_INCLUDES = -I/home/atomic/Documents/my-projects/Project-DELTA/src -I/home/atomic/Documents/my-projects/Project-DELTA/include -I/home/atomic/Documents/my-projects/Project-DELTA/libs/imgui -I/home/atomic/Documents/my-projects/Project-DELTA/libs/glfw/include
 
 CXX_FLAGS = -std=gnu++17
 
