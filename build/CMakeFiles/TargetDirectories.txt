@@ -1,3 +1,0 @@
-/home/atomic/Documents/my-projects/Project-DELTA/build/CMakeFiles/reaper.dir
-/home/atomic/Documents/my-projects/Project-DELTA/build/CMakeFiles/edit_cache.dir
-/home/atomic/Documents/my-projects/Project-DELTA/build/CMakeFiles/rebuild_cache.dir
