@@ -1,7 +1,7 @@
 # Project-DELTA
 #### This software is an advanced GUI based Network scanner and DNS resolver written in C++.
 ### Features:
-- IP address discovery using domain names via DNS records to bypass cloudflare
+- IP address and country discovery using domain names via DNS records to bypass cloudflare
 - Advanced network scan on a target IP(Open ports,services and risk levels)
 
 
